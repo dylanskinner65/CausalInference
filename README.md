@@ -32,3 +32,9 @@ A nice introductory tutorial on Pytorch Geometric. Pytorch Geometric is a librar
 <h2><a href="https://pytorch-geometric.readthedocs.io" target="_blank" rel="noopener noreferrer">PyTorch Geometric Documentation</a></h2>
 
 Maybe we can find a way to take a super basic dataset and implement a GNN on it. Then we can remove connections to nodes and see how well/poor the prediction is.
+
+<h1>Potential Datasets</h1>
+
+<h2><a href="https://www.causality.inf.ethz.ch/data/LUCAS.html" target="_blank" rel="noopener noreferrer">LUCAS0: Medical Diagnosis</a></h2>
+
+This is a synthetically generated dataset by causal Bayesian networks with binary variables. It has 11 different variables and a ton of samples. The variables interact with each other in a DAG format which is perfect for using SCMs and GNNs. Maybe we could take the data, format it in a way the PyTorch Geometric likes it, and then run a GNN on it, removing different connections? Maybe that can simulate a $\text{do}()$ operation?
