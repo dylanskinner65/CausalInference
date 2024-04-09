@@ -5,8 +5,24 @@
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}{Corollary}[theorem]
 \newtheorem{lemma}[theorem]{Lemma}
+\usepackage{tkz-graph}
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes.geometric}
+
+
+\SetVertexNormal[Shape      = circle,
+                 FillColor  = cyan,
+                 LineWidth  = 2pt]
+\SetUpEdge[lw         = 1pt,
+           color      = black,
+           labelcolor = white,
+           labeltext  = red,
+           labelstyle = {sloped,draw,text=blue}]
+\tikzset{Bullet/.style={fill=black,draw,color=#1,circle,minimum size=3pt,scale=0.75}}
+
 
 \begin{document}
+
 
 \title{Causal Inference with Graphical Neural Networks}
 \author{Your Name}
@@ -46,6 +62,7 @@ With this in mind, we now define the $\textbf{do}$ operator.
     \[
         P(X_1, \dots, X_n \;|\; \textbf{do}(X_i = x_i)) = \frac{P(x_1,\dots,x_n)}{P(x_i\;|\; \textup{par}(x_i))} = \prod_{j\neq i}P(x_j\;|\; \textup{par}(x_j)).
     \]
+    \label{theorem:do}
 \end{theorem}
 
 In this, we have $\text{par}(x_i)$ represent values of the parent nodes of $\text{PAR}(X_i)$ of $X_i$ in $\Gamma$.
@@ -64,7 +81,99 @@ given we do a single event? That leads to the following corollary.
     where the sum runs over all values $\textup{par}$ that the variables $\textup{PAR}(X)$ can take. If $X$ has no parents, then
 
     \[P(y\;|\; \textbf{do}(x)) = \frac{P(x,\,y)}{P(x)} = P(y\;|\; x).\]
+    \label{corollary:do}
 \end{corollary}
+
+Let us now consider a basic example to see how this works. Consider the following causal diagram in Figure~\ref{fig:causal_dia}.
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[scale=1.5, Bullet/.style={circle, draw=black, fill=#1, inner sep=0pt, minimum size=3mm, line width=1.pt}]
+        \node[Bullet=cyan,label=above :{$A$}] (A) at (0,2){};
+        \node[Bullet=cyan,label=above :{$C$}] (C) at (4,2){};
+        \node[Bullet=cyan,label=below :{$B$}] (B) at (2,1){};
+        \node[Bullet=cyan,label=below :{$Y$}] (Y) at (4,0){};
+        \node[Bullet=cyan,label=below :{$X$}] (X) at (0,0){};
+    
+        \draw[->, line width=1] (A) -- (B);
+        \draw[->, line width=1] (C) -- (B);
+        \draw[->, line width=1] (B) -- (X);
+        \draw[->, line width=1] (C) -- (Y);
+        \draw[->, line width=1] (A) -- (X);
+    \end{tikzpicture}
+    \caption{Basic causal diagram. Note it is in the form of a directed acyclic graph (DAG).}
+    \label{fig:causal_dia}
+\end{figure}
+
+In this diagram, we can see that $A$ and $C$ are both parents of $B$. So, for any values of $x$ and $b$, 
+Corollary~\ref{corollary:do} tells us that
+
+\begin{align*}
+    P(X = x \,|\, \textbf{do}(B=b)) &= \sum_{\text{par}(b)}\frac{P(x, \,b, \,\text{par}(b))}{P(b\,|\, \text{par}(b))} \\
+    %  &= \sum_{a}\sum_{c}\frac{P(X=x\,, \, A=a\,,\, B=b \, ,\, C=c)}{P(B=b \;|\; A=a,\, C=c)} \\
+    %  &= \sum_{a}\sum_{c}\frac{P(X=x\;|\; A=a\,,\, B=b)P(B=b\;|\; A=a,\, C=c)P(A=a)P(C=c)}{P(B=b \;|\; A=a,\, C=c)} \\
+    %  &= \sum_{a}\sum_{c}P(X=x\;|\; A=a\,,\, B=b)P(A=a)P(C=c) \\
+\end{align*}
+
+which, written out, is 
+
+\begin{equation*}
+    \sum_{\text{par}(b)}\frac{P(x, \,b, \,\text{par}(b))}{P(b\,|\, \text{par}(b))} = \sum_{a}\sum_{c}\frac{P(X=x\,, \, A=a\,,\, B=b \, ,\, C=c)}{P(B=b \;|\; A=a,\, C=c)}.
+\end{equation*}
+
+By dependence of nodes only on their parents and the rules of probability, this turns into
+
+\begin{equation*}
+    \sum_{a}\sum_{c}\frac{P(X=x\;|\; A=a\,,\, B=b)P(B=b\;|\; A=a,\, C=c)P(A=a)P(C=c)}{P(B=b \;|\; A=a,\, C=c)},
+\end{equation*}
+
+which simplifies to
+
+\begin{equation*}
+    \sum_{a}\sum_{c}P(X=x\;|\; A=a\,,\, B=b)P(A=a)P(C=c).
+\end{equation*}
+
+Since there is only one instance where we are considering the probability with respect to $c$, 
+we can simplify this to
+
+\begin{equation*}
+    \sum_{a}P(X=x\;|\; A=a\,,\, B=b)P(A=a),
+\end{equation*}
+
+which is our final answer.
+
+While this introduction to the \textbf{do} operator might feel a bit abstract, it is the foundation
+of all current research in causal inference. 
+
+\section{Data}
+
+For our project, we used the LUCAS0 dataset~\cite{lucas_dataset}, which is a toy data set 
+generated artificially by causal Bayesian networks with binary variables. The LUCAS0 dataset
+is a DAG with 11 nodes and 2000 training samples, where the DAG is represented as
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[scale=1.5, Bullet/.style={circle, draw=black, fill=#1, inner sep=0pt, minimum size=3mm, line width=1.pt}]
+        \draw[help lines, gray] (0,0) grid (6,6);
+        \node[ellipse, draw=black, fill=lime] (A) at (2,2){Anxiety};
+        \node[ellipse, draw=black, fill=lime] (P) at (5,2){Peer Pressure};
+        \node[ellipse, draw=black, fill=teal] (S) at (3,1){Smoking};
+        \node[ellipse, draw=black, fill=lime] (Y) at (1,1){Yellow Fingers};
+        \node[Bullet=cyan,label=below :{$Y$}] (Y) at (4,0){};
+        \node[Bullet=cyan,label=below :{$X$}] (X) at (0,0){};
+    
+        \draw[->, line width=1] (A) -- (S);
+        \draw[->, line width=1] (P) -- (S);
+        \draw[->, line width=1] (B) -- (X);
+        \draw[->, line width=1] (C) -- (Y);
+        \draw[->, line width=1] (A) -- (X);
+    \end{tikzpicture}
+    \caption{Basic causal diagram. Note it is in the form of a directed acyclic graph (DAG).}
+    \label{fig:lucas_dag}
+\end{figure}
+
+
+
 
 
 
