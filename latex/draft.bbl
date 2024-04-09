@@ -1,3 +1,8 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{pearl2009causal}
+Judea Pearl.
+\newblock Causal inference in statistics: An overview.
+\newblock {\em Statistics Surveys}, 3:96--146, 2009.
 
 \end{thebibliography}

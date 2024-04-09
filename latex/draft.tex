@@ -1,6 +1,10 @@
 \documentclass{article}
 \usepackage{amsmath}
 \usepackage{graphicx}
+\usepackage{ntheorem}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
 
 \begin{document}
 
@@ -13,6 +17,56 @@
 
 
 % Introduce the topic of causal inference with Graphical Neural Networks (GNNs).
+
+\section{$\textbf{do}$ Operator}
+
+The \textbf{do} operator is a way to represent interventions in a causal model. 
+It is a way to represent the effect of an intervention on a variable. As an example, 
+consider the following model involving smoking.
+
+If a person's fingernails $(N)$ have turned yellow, this implies a higher probability 
+that they are a heavy smoker $(S)$ and hence have a higher probability of developing 
+lung cancer $(C)$. But, simply dyeing a persons fingernails yellow does not impact 
+their probability of developing lung cancer. 
+
+So, in terms of $\textbf{do}$ calculus, we can denote the process of setting a 
+variable $N$ to have a value $\textit{yellow}$ by $\textbf{do}(N = \textit{yellow})$. 
+We note that 
+
+\begin{equation*}
+P(C \;|\;N = \textit{yellow}) \neq P(C\;|\; \textbf{do}(N=\textit{yellow})).
+\end{equation*}
+
+With this in mind, we now define the $\textbf{do}$ operator.
+
+\begin{theorem}[{{\cite{pearl2009causal}}}]
+    In a causal diagram $\Gamma$ with nodes $X_1,\dots, X_n$ and joint distribution 
+    $P(X_1, \dots, X_n)$, the result of doing $X_i = x_i$ on the joint distribution is
+
+    \[
+        P(X_1, \dots, X_n \;|\; \textbf{do}(X_i = x_i)) = \frac{P(x_1,\dots,x_n)}{P(x_i\;|\; \textup{par}(x_i))} = \prod_{j\neq i}P(x_j\;|\; \textup{par}(x_j)).
+    \]
+\end{theorem}
+
+In this, we have $\text{par}(x_i)$ represent values of the parent nodes of $\text{PAR}(X_i)$ of $X_i$ in $\Gamma$.
+The probabilities on the right hand side of the above equation are what we call \textit{preintervention}. 
+This means they use the original probabilities from the original model before doing $X_i = x_i$.
+
+It is important to note that the above equation is how we calculate the probability of several events 
+happening given one event has happened. What if we want to get the probability of a single event happening, 
+given we do a single event? That leads to the following corollary.
+
+\begin{corollary}
+    If $X$ and $Y$ are random variables in a causal diagram $\Gamma$ and $\textup{PAR}(X)$ are the parents of $X$, then
+
+    \[P(y\;|\;  \textbf{do}(x)) = \sum_{\textup{par}}\frac{P(x,\,y,\,\textup{par})}{P(x\;|\; \textup{par})},\]
+
+    where the sum runs over all values $\textup{par}$ that the variables $\textup{PAR}(X)$ can take. If $X$ has no parents, then
+
+    \[P(y\;|\; \textbf{do}(x)) = \frac{P(x,\,y)}{P(x)} = P(y\;|\; x).\]
+\end{corollary}
+
+
 
 \section{Background}
 
