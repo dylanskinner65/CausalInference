@@ -25,11 +25,33 @@
 
 
 \title{Causal Inference with Graphical Neural Networks}
-\author{Your Name}
+\author{Gwen Johnson\and Dylan Skinner\and Dallin Stewart\and Jason Vasquez}
 \date{\today}
 \maketitle
 
 \section{Introduction}
+
+
+\section{Graph Neural Networks}
+
+Originally proposed in 2005 by Mori et al.~\cite{gori2005new}, Graph Neural Networks 
+(GNNs) are a class of neural networks that operate on graph-structured data. 
+They have gained significant attention in recent years due to their versatility 
+in handling various types of graph data, including social networks, citation networks, 
+biological networks, and more. 
+
+Unlike traditional neural networks, which operate on 
+grid-like structures such as images or sequences, GNNs are specifically designed to 
+capture and leverage the structural information present in graphs. One of their 
+key strengths lies in their ability to learn meaningful representations of nodes in a 
+graph, which can then be used for various downstream tasks such as node classification, 
+link prediction, and graph classification. Their ability to capture and model complex 
+relationships in graph data makes them invaluable tools for exploring and understanding 
+real-world phenomena represented in graph form.
+
+In our project, we are utilizing the power of GNNs to perform a supervised classification
+task. This means we are training a GNN on a labeled, tabular dataset, where each graph instance
+(or node) is associated with a target label.
 
 
 % Introduce the topic of causal inference with Graphical Neural Networks (GNNs).
@@ -145,31 +167,50 @@ which is our final answer.
 While this introduction to the \textbf{do} operator might feel a bit abstract, it is the foundation
 of all current research in causal inference. 
 
+
+
+
+
 \section{Data}
 
 For our project, we used the LUCAS0 dataset~\cite{lucas_dataset}, which is a toy data set 
 generated artificially by causal Bayesian networks with binary variables. The LUCAS0 dataset
-is a DAG with 11 nodes and 2000 training samples, where the DAG is represented as
+is a DAG with 11 nodes and 2000 training samples, where the DAG is represented as in Figure~\ref{fig:lucas_dag}.
 
 \begin{figure}[h]
     \centering
     \begin{tikzpicture}[scale=1.5, Bullet/.style={circle, draw=black, fill=#1, inner sep=0pt, minimum size=3mm, line width=1.pt}]
-        \draw[help lines, gray] (0,0) grid (6,6);
+        % \draw[help lines, gray] (0,0) grid (6,6);
         \node[ellipse, draw=black, fill=lime] (A) at (2,2){Anxiety};
         \node[ellipse, draw=black, fill=lime, align=center] (P) at (4,2){Peer\\Pressure};
         \node[ellipse, draw=black, fill=teal] (S) at (3,1){Smoking};
         \node[ellipse, draw=black, fill=lime, align=center] (Y) at (1,1){Yellow\\Fingers};
         \node[ellipse, draw=black, fill=lightgray, align=center] (B) at (6, 2){Born on\\Even Day};
         \node[ellipse, draw=black, fill=teal, align=center] (G) at (5, 1){Genetics};
-        \node[ellipse, draw=black, fill=teal, align=center] (C) at (2, 0){Allergy};
-        \node[Bullet=cyan,label=below :{$X$}] (X) at (0,0){};
+        \node[ellipse, draw=black, fill=teal, align=center] (Al) at (2, 0){Allergy};
+        \node[ellipse, draw=black, fill=pink, align=center] (L) at (4, 0){Lung\\Cancer};
+        \node[ellipse, draw=black, fill=lime, align=center] (AD) at (6, 0){Attention\\Disorder};
+        \node[ellipse, draw=black, fill=teal, align=center] (C) at (3, -1){Coughing};
+        \node[ellipse, draw=black, fill=teal, align=center] (F) at (5, -1){Fatigue};
+        \node[ellipse, draw=black, fill=lime, align=center] (CA) at (6, -2){Car\\Accident};
     
         \draw[->, line width=1] (A) -- (S);
         \draw[->, line width=1] (P) -- (S);
         \draw[->, line width=1] (S) -- (Y);
+        \draw[->, line width=1] (S) -- (L);
+        \draw[->, line width=1] (G) -- (L);
+        \draw[->, line width=1] (G) -- (AD);
+        \draw[->, line width=1] (Al) -- (C);
+        \draw[->, line width=1] (L) -- (C);
+        \draw[->, line width=1] (L) -- (F);
+        \draw[->, line width=1] (C) -- (F);
+        \draw[->, line width=1] (F) -- (CA);
+        \draw[->, line width=1] (AD) -- (CA);
 
     \end{tikzpicture}
-    \caption{Basic causal diagram. Note it is in the form of a directed acyclic graph (DAG).}
+    \caption{Basic causal diagram. Note it is in the form of a directed acyclic graph (DAG). Our target variable
+    is shaded in ${\color{pink} \textbf{pink}}$, and the nodes in {\color{teal} \textbf{teal}} constitude the Markov
+    blanket of the target variable.}
     \label{fig:lucas_dag}
 \end{figure}
 
@@ -214,6 +255,8 @@ is a DAG with 11 nodes and 2000 training samples, where the DAG is represented a
 
 % Acknowledge any individuals or organizations that contributed to the project.
 
+
+\newpage
 % Bibliography
 \bibliographystyle{plain}
 \bibliography{references} % Replace 'references' with the name of your .bib file
