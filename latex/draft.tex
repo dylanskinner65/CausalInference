@@ -156,17 +156,18 @@ is a DAG with 11 nodes and 2000 training samples, where the DAG is represented a
     \begin{tikzpicture}[scale=1.5, Bullet/.style={circle, draw=black, fill=#1, inner sep=0pt, minimum size=3mm, line width=1.pt}]
         \draw[help lines, gray] (0,0) grid (6,6);
         \node[ellipse, draw=black, fill=lime] (A) at (2,2){Anxiety};
-        \node[ellipse, draw=black, fill=lime] (P) at (5,2){Peer Pressure};
+        \node[ellipse, draw=black, fill=lime, align=center] (P) at (4,2){Peer\\Pressure};
         \node[ellipse, draw=black, fill=teal] (S) at (3,1){Smoking};
-        \node[ellipse, draw=black, fill=lime] (Y) at (1,1){Yellow Fingers};
-        \node[Bullet=cyan,label=below :{$Y$}] (Y) at (4,0){};
+        \node[ellipse, draw=black, fill=lime, align=center] (Y) at (1,1){Yellow\\Fingers};
+        \node[ellipse, draw=black, fill=lightgray, align=center] (B) at (6, 2){Born on\\Even Day};
+        \node[ellipse, draw=black, fill=teal, align=center] (G) at (5, 1){Genetics};
+        \node[ellipse, draw=black, fill=teal, align=center] (C) at (2, 0){Allergy};
         \node[Bullet=cyan,label=below :{$X$}] (X) at (0,0){};
     
         \draw[->, line width=1] (A) -- (S);
         \draw[->, line width=1] (P) -- (S);
-        \draw[->, line width=1] (B) -- (X);
-        \draw[->, line width=1] (C) -- (Y);
-        \draw[->, line width=1] (A) -- (X);
+        \draw[->, line width=1] (S) -- (Y);
+
     \end{tikzpicture}
     \caption{Basic causal diagram. Note it is in the form of a directed acyclic graph (DAG).}
     \label{fig:lucas_dag}
