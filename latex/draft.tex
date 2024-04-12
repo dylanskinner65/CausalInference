@@ -224,11 +224,48 @@ creators of the dataset used to generate the data. These probabilities can be fo
 in Appendix~\ref{create}.
 
 
+\section{do Calculus Result stuff (idk where this goes)}
 
+Let's consider the following conditional probabilities with \textbf{do} operators applied:
 
+\begin{align*}
+    P(\text{LC} = \text{T} \;&|\; \textbf{do}(\text{YF} = \text{T})), \\
+    P(\text{LC} = \text{T} \;&|\; \textbf{do}(\text{PP} = \text{T})), \\
+    P(\text{LC} = \text{T} \;&|\; \textbf{do}(\text{A} = \text{T})), \\
+    P(\text{LC} = \text{T} \;&|\; \textbf{do}(\text{AD} = \text{T})), \\
+    P(\text{LC} = \text{T} \;&|\; \textbf{do}(\text{CA} = \text{T})), \\
+\end{align*}
 
+where LC is lung cancer, YF is yellow fingers, PP is peer pressure, A is anxiety, AD is attention disorder, and CA 
+is car accident. We note that we chose this probability because it does not involve any
+variables that are in the Markov blanket of our target variable. Thus, we should expect that there is very little
+predictive power in this probability.
 
-\section{Background}
+Plugging forward with \textbf{do} calculus, we can write $P(\text{LC} = \text{T} \;|\; \textbf{do}(\text{YF} = \text{T}))$ as
+(using corollary~\ref{corollary:do})
+
+\begin{equation*}
+    P(\text{LC} = \text{T} \;|\; \textbf{do}(\text{YF} = \text{T})) = 
+    \sum_{s\in\{T, F\}} \frac{P(\text{YF} = \text{T},\, \text{LC} = \text{T},\, \text{S} = s)}{P(\text{YF} = \text{T}\,|\, \text{S} = s)},
+\end{equation*}
+
+where $\text{S}$ is smoking. Using the property that we can split the numerator into probabilities only involving parents ({\color{red}rewrite})
+
+\begin{equation*}
+    \sum_{s\in\{T, F\}}\frac{P(\text{YF} =\text{T}\;|\; \text{S} = s) P(\text{LC} 
+    = \text{T}\;|\; \text{S}=s,\, \text{G}) P(\text{S}=s\;|\;\text{A},\, \text{PP})}
+    {P(\text{YF} = \text{T}\;|\; \text{S} = s)}.
+\end{equation*}
+
+All of these fun conditionals lead us to
+
+\begin{equation*}
+    \sum_{s,a,g,p}\frac{P(\text{YF} =\text{T}\;|\; \text{S} = s) P(\text{LC} 
+    = \text{T}\;|\; \text{S}=s,\, \text{G}=g) P(\text{S}=s\;|\;\text{A}=a,\, \text{PP}=p)}
+    {P(\text{YF} = \text{T}\;|\; \text{S} = s)},
+\end{equation*}
+
+where each $s,a,g,p$ is summed over the set $\{T, F\}$.
 
 % Provide background information on causal inference, neural networks, and Graphical Neural Networks (GNNs).
 
@@ -295,33 +332,33 @@ which were used to generate the data. These probabilities are found in Table~\re
         \hline
         P(Anxiety=T) & 0.64277 \\ \hline
         P(Peer Pressure=T) & 0.32997 \\ \hline
-        P(Smoking=T|Peer Pressure=F, Anxiety=F) & 0.43118 \\ \hline
-        P(Smoking=T|Peer Pressure=T, Anxiety=F) & 0.74591 \\ \hline
-        P(Smoking=T|Peer Pressure=F, Anxiety=T) & 0.8686 \\ \hline
-        P(Smoking=T|Peer Pressure=T, Anxiety=T) & 0.91576 \\ \hline
-        P(Yellow Fingers=T|Smoking=F) & 0.23119 \\ \hline
-        P(Yellow Fingers=T|Smoking=T) & 0.95372 \\ \hline
+        P(Smoking=T $\vert$ Peer Pressure=F, Anxiety=F) & 0.43118 \\ \hline
+        P(Smoking=T $\vert$ Peer Pressure=T, Anxiety=F) & 0.74591 \\ \hline
+        P(Smoking=T $\vert$ Peer Pressure=F, Anxiety=T) & 0.8686 \\ \hline
+        P(Smoking=T $\vert$ Peer Pressure=T, Anxiety=T) & 0.91576 \\ \hline
+        P(Yellow Fingers=T $\vert$ Smoking=F) & 0.23119 \\ \hline
+        P(Yellow Fingers=T $\vert$ Smoking=T) & 0.95372 \\ \hline
         P(Genetics=T) & 0.15953 \\ \hline
-        P(Lung cancer=T|Genetics=F, Smoking=F) & 0.23146 \\ \hline
-        P(Lung cancer=T|Genetics=T, Smoking=F) & 0.86996 \\ \hline
-        P(Lung cancer=T|Genetics=F, Smoking=T) & 0.83934 \\ \hline
-        P(Lung cancer=T|Genetics=T, Smoking=T) & 0.99351 \\ \hline
-        P(Attention Disorder=T|Genetics=F) & 0.28956 \\ \hline
-        P(Attention Disorder=T|Genetics=T) & 0.68706 \\ \hline
+        P(Lung cancer=T $\vert$ Genetics=F, Smoking=F) & 0.23146 \\ \hline
+        P(Lung cancer=T $\vert$ Genetics=T, Smoking=F) & 0.86996 \\ \hline
+        P(Lung cancer=T $\vert$ Genetics=F, Smoking=T) & 0.83934 \\ \hline
+        P(Lung cancer=T $\vert$ Genetics=T, Smoking=T) & 0.99351 \\ \hline
+        P(Attention Disorder=T $\vert$ Genetics=F) & 0.28956 \\ \hline
+        P(Attention Disorder=T $\vert$ Genetics=T) & 0.68706 \\ \hline
         P(Born an Even Day=T) & 0.5 \\ \hline
         P(Allergy=T) & 0.32841 \\ \hline
-        P(Coughing=T|Allergy=F, Lung cancer=F) & 0.1347 \\ \hline
-        P(Coughing=T|Allergy=T, Lung cancer=F) & 0.64592 \\ \hline
-        P(Coughing=T|Allergy=F, Lung cancer=T) & 0.7664 \\ \hline
-        P(Coughing=T|Allergy=T, Lung cancer=T) & 0.99947 \\ \hline
-        P(Fatigue=T|Lung cancer=F, Coughing=F) & 0.35212 \\ \hline
-        P(Fatigue=T|Lung cancer=T, Coughing=F) & 0.56514 \\ \hline
-        P(Fatigue=T|Lung cancer=F, Coughing=T) & 0.80016 \\ \hline
-        P(Fatigue=T|Lung cancer=T, Coughing=T) & 0.89589 \\ \hline
-        P(Car Accident=T|Attention Disorder=F, Fatigue=F) & 0.2274 \\ \hline
-        P(Car Accident=T|Attention Disorder=T, Fatigue=F) & 0.779 \\ \hline
-        P(Car Accident=T|Attention Disorder=F, Fatigue=T) & 0.78861 \\ \hline
-        P(Car Accident=T|Attention Disorder=T, Fatigue=T) & 0.97169 \\ \hline
+        P(Coughing=T $\vert$ Allergy=F, Lung cancer=F) & 0.1347 \\ \hline
+        P(Coughing=T $\vert$ Allergy=T, Lung cancer=F) & 0.64592 \\ \hline
+        P(Coughing=T $\vert$ Allergy=F, Lung cancer=T) & 0.7664 \\ \hline
+        P(Coughing=T $\vert$ Allergy=T, Lung cancer=T) & 0.99947 \\ \hline
+        P(Fatigue=T $\vert$ Lung cancer=F, Coughing=F) & 0.35212 \\ \hline
+        P(Fatigue=T $\vert$ Lung cancer=T, Coughing=F) & 0.56514 \\ \hline
+        P(Fatigue=T $\vert$ Lung cancer=F, Coughing=T) & 0.80016 \\ \hline
+        P(Fatigue=T $\vert$ Lung cancer=T, Coughing=T) & 0.89589 \\ \hline
+        P(Car Accident=T $\vert$ Attention Disorder=F, Fatigue=F) & 0.2274 \\ \hline
+        P(Car Accident=T $\vert$ Attention Disorder=T, Fatigue=F) & 0.779 \\ \hline
+        P(Car Accident=T $\vert$ Attention Disorder=F, Fatigue=T) & 0.78861 \\ \hline
+        P(Car Accident=T $\vert$ Attention Disorder=T, Fatigue=T) & 0.97169 \\ \hline
         \hline
     \end{tabular}
     \caption{Conditional probabilities for the nodes in the LUCAS0 dataset.}
