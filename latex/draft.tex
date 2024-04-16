@@ -434,12 +434,12 @@ We have $P(\text{LC} = \text{T} \,\vert\, \textbf{do}(\text{An} = \text{T}))$ yi
 
 \subsection{$P$(\text{LC} = \text{T} $\vert$ \textbf{do}(\text{AD} = \text{T}))}
 
-We have
+We have $P(\text{LC} = \text{T} \,\vert\, \textbf{do}(\text{AD} = \text{T}))$
 
 \begin{align*}
-    P(\text{LC} = \text{T} \,\vert\, \textbf{do}(\text{AD} = \text{T})) &= P(\text{LC} = \text{T},\, \text{AD} = \text{T},\, \text{G}) \\
-        &= \Biggl( \sum_{g} P(\text{AD} = \text{T}\,\vert\, \text{G} = g)\Bigl(\sum_{s}P(\text{LC} = T \,|\, \text{S} = s,\, \text{G} = g)\Bigr)\Biggr) \\
-    &= \rule{2cm}{0.15mm}.
+     &= \sum_{g} \frac{P(\text{LC} = \text{T},\, \text{AD} = \text{T},\, \text{G}=g)}{P(\text{AD} = T\;|\; G=g)} \\
+     &= \sum_{g, s, an,  p} \frac{P(\text{LC} = \text{T},\, \text{AD} = \text{T},\, \text{G}=g,\, \text{S} = s,\, \text{AN} = an,\, \text{PP} = p)}{P(\text{AD} = T\;|\; G=g)} \\
+    &= \sum_{g,s,an,p}\frac{P(\text{LC}=T\,|\,\text{S}=s, \text{G}=g)P(\text{G}=g)P(\text{S}=s\,|\,\text{AN}=an,\,\text{PP}=p)}{}.
 \end{align*}
 
 

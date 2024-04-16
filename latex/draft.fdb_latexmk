@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex draft"] 1713233703 "draft.aux" "draft.bbl" "draft" 1713233704
+["bibtex draft"] 1713295572 "draft.aux" "draft.bbl" "draft" 1713295620
   "/usr/local/texlive/2022/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "draft.aux" 1713233704 6003 12f89d973051fa2935fd08cf84b0a779 "pdflatex"
+  "draft.aux" 1713295619 6003 12f89d973051fa2935fd08cf84b0a779 "pdflatex"
   "references.bib" 1712845238 3947 c8d8517ed9318207754bee71539389b2 ""
   (generated)
   "draft.bbl"
   "draft.blg"
-["pdflatex"] 1713233703 "/Users/dylanskinner/Desktop/math522/CausalInference/latex/draft.tex" "draft.pdf" "draft" 1713233704
-  "/Users/dylanskinner/Desktop/math522/CausalInference/latex/draft.tex" 1713233702 19915 3aa5b6f05b2db267f2e6ee7ce85b1cc3 ""
+["pdflatex"] 1713295619 "/Users/dylanskinner/Desktop/math522/CausalInference/latex/draft.tex" "draft.pdf" "draft" 1713295620
+  "/Users/dylanskinner/Desktop/math522/CausalInference/latex/draft.tex" 1713295619 20090 fbd4d999b15296ff1aba5b030147387e ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -168,10 +168,10 @@
   "/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1647878959 4410336 7d30a02e9fa9a16d7d1f8d037ba69641 ""
   "/usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1657121839 2826438 d9a24ea19c8bad2fba92bc4c553da93c ""
   "/usr/local/texlive/2022/texmf.cnf" 1647878952 577 209b46be99c9075fd74d4c0369380e8c ""
-  "draft.aux" 1713233704 6003 12f89d973051fa2935fd08cf84b0a779 "pdflatex"
-  "draft.bbl" 1713233703 742 dbd75469de187b9b5d7fb8171f0a3055 "bibtex draft"
-  "draft.out" 1713233704 2546 ba2b28b0cf899b70579fcc0e9589f4fe "pdflatex"
-  "draft.tex" 1713233702 19915 3aa5b6f05b2db267f2e6ee7ce85b1cc3 ""
+  "draft.aux" 1713295619 6003 12f89d973051fa2935fd08cf84b0a779 "pdflatex"
+  "draft.bbl" 1713295572 742 dbd75469de187b9b5d7fb8171f0a3055 "bibtex draft"
+  "draft.out" 1713295619 2546 ba2b28b0cf899b70579fcc0e9589f4fe "pdflatex"
+  "draft.tex" 1713295619 20090 fbd4d999b15296ff1aba5b030147387e ""
   (generated)
   "draft.aux"
   "draft.log"
