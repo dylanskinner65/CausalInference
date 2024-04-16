@@ -8,6 +8,7 @@
 \usepackage{tkz-graph}
 \usetikzlibrary{arrows}
 \usetikzlibrary{shapes.geometric}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 \usepackage{hyperref}
 
 
@@ -231,7 +232,7 @@ Let's consider the following conditional probabilities with \textbf{do} operator
 \begin{align*}
     P(\text{LC} = \text{T} \;&|\; \textbf{do}(\text{YF} = \text{T})), \\
     P(\text{LC} = \text{T} \;&|\; \textbf{do}(\text{PP} = \text{T})), \\
-    P(\text{LC} = \text{T} \;&|\; \textbf{do}(\text{A} = \text{T})), \\
+    P(\text{LC} = \text{T} \;&|\; \textbf{do}(\text{A} = \text{T})), \numberthis \label{do_list}\\
     P(\text{LC} = \text{T} \;&|\; \textbf{do}(\text{AD} = \text{T})), \\
     P(\text{LC} = \text{T} \;&|\; \textbf{do}(\text{CA} = \text{T})), \\
 \end{align*}
@@ -241,31 +242,71 @@ is car accident. We note that we chose this probability because it does not invo
 variables that are in the Markov blanket of our target variable. Thus, we should expect that there is very little
 predictive power in this probability.
 
-Plugging forward with \textbf{do} calculus, we can write $P(\text{LC} = \text{T} \;|\; \textbf{do}(\text{YF} = \text{T}))$ as
-(using corollary~\ref{corollary:do})
+Plugging forward with \textbf{do} calculus, we can do one as an example. We write $P(\text{LC} = \text{T} \;|\; \textbf{do}(\text{YF} = \text{T}))$
+(using corollary~\ref{corollary:do}) as
 
-\begin{equation*}
+\begin{equation}
     P(\text{LC} = \text{T} \;|\; \textbf{do}(\text{YF} = \text{T})) = 
     \sum_{s\in\{T, F\}} \frac{P(\text{YF} = \text{T},\, \text{LC} = \text{T},\, \text{S} = s)}{P(\text{YF} = \text{T}\,|\, \text{S} = s)},
-\end{equation*}
+    \label{yf1}
+\end{equation}
 
-where $\text{S}$ is smoking. Using the property that we can split the numerator into probabilities only involving parents ({\color{red}rewrite})
+where $\text{S}$ is smoking. Since the Lung Cancer node has Smoking and Genetics as parents, and Smoking
+has parent Anxiety and Peer Pressure (see Figure~\ref{fig:lucas_dag}), we can write Equation~\ref{yf1} to
+
+\begin{equation}
+    \sum_{S, G, A, PP}\frac{P(\text{YF} =\text{T}\;|\; \text{S}) P(\text{LC} 
+    = \text{T}\;|\; \text{S},\, \text{G}) P(\text{G}) P(\text{S}\;|\;\text{A},\, \text{PP}) P(\text{A})P(\text{PP})}
+    {P(\text{YF} = \text{T}\;|\; \text{S})}.
+    \label{yf2}
+\end{equation}
+
+
+where each $\text{S},\text{A}, \text{G}, \text{PP}$ is in terms of $\{T, F\}$.
+
+Since not every term is in terms of every variable, we can re-write the Equation~\ref{yf2} as 
+
+\begin{align*}
+    &=\sum_{S} \frac{P(\text{YF} = T\,|\, S)}{P(\text{YF} = T\,|\, \text{S})}
+        \Biggl(\sum_{G} P(\text{LC} = \text{T}\,|\, \text{S}, \text{G})P(\text{G})\Biggr)
+            \Biggl(\sum_{A} P(\text{A}) 
+                \Bigl(\sum_{\text{PP}}P(\text{S}\,|\, \text{A}, \text{PP})P(\text{PP})\Bigr) 
+            \Biggr) \\
+    &=\sum_{S}\Big(\sum_{G} P(\text{LC} = \text{T}\,|\, \text{S}, \text{G})P(\text{G})\Big)
+        \Biggl(\sum_{A} P(\text{A}) 
+            \Bigl(\sum_{\text{PP}}P(\text{S}\,|\, \text{A}, \text{PP})P(\text{PP})\Bigr) 
+        \Biggr). \numberthis \label{yf3}
+\end{align*}
+
+Using the probabilities from Table~\ref{tab:lucas_probs} on Equation~\ref{yf3} we get
 
 \begin{equation*}
-    \sum_{s\in\{T, F\}}\frac{P(\text{YF} =\text{T}\;|\; \text{S} = s) P(\text{LC} 
-    = \text{T}\;|\; \text{S}=s,\, \text{G}) P(\text{S}=s\;|\;\text{A},\, \text{PP})}
-    {P(\text{YF} = \text{T}\;|\; \text{S} = s)}.
+    P(\text{LC} = \text{T} \;|\; \textbf{do}(\text{YF} = \text{T})) = {\color{red} \rule{2cm}{0.15mm} \text{ fix this!!}}
 \end{equation*}
 
-All of these fun conditionals lead us to
+Performing similar calculations on the other probabilities in Equation~\ref{do_list}, we get
 
-\begin{equation*}
-    \sum_{s,a,g,p}\frac{P(\text{YF} =\text{T}\;|\; \text{S} = s) P(\text{LC} 
-    = \text{T}\;|\; \text{S}=s,\, \text{G}=g) P(\text{S}=s\;|\;\text{A}=a,\, \text{PP}=p)}
-    {P(\text{YF} = \text{T}\;|\; \text{S} = s)},
-\end{equation*}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \textit{do Statements} & \textit{Probabilities} \\ \hline
+        $P$(\text{LC} = \text{T} $\vert$ \textbf{do}(\text{YF} = \text{T})) &  \\ \hline
+        $P$(\text{LC} = \text{T} $\vert$ \textbf{do}(\text{PP} = \text{T})) &  \\ \hline
+        $P$(\text{LC} = \text{T} $\vert$ \textbf{do}(\text{A} = \text{T})) &   \\ \hline
+        $P$(\text{LC} = \text{T} $\vert$ \textbf{do}(\text{AD} = \text{T})) &  \\ \hline
+        $P$(\text{LC} = \text{T} $\vert$ \textbf{do}(\text{CA} = \text{T})) &  \\ \hline
+    \end{tabular}
+    \caption{The resulting probabilities of the \textbf{do} statements found in Equation~\ref{do_list}.
+    For a more detailed workthrough of these probabilities, see Appendix~\ref{do_work}.}
+    \label{tab:do_work_tab}
+\end{table}
 
-where each $s,a,g,p$ is summed over the set $\{T, F\}$.
+
+
+% \begin{equation}
+    
+% \end{equation}
 
 % Provide background information on causal inference, neural networks, and Graphical Neural Networks (GNNs).
 
@@ -366,7 +407,40 @@ which were used to generate the data. These probabilities are found in Table~\re
 \end{table}
 
 
+\section{Conditioning Outside Markov Blanket Results}
+\label{do_work}
 
+\subsection{$P$(\text{LC} = \text{T} \,$\vert$\, \textbf{do}(\text{PP} = \text{T}))}
+
+We have $P(\text{LC} = \text{T} \,\vert\, \textbf{do}(\text{PP} = \text{T}))$ yields
+
+\begin{align*}
+     &= P(\text{LC} = \text{T},\, \text{PP} = \text{T}) \\
+        &= P(\text{PP} = \text{T})\left(\sum_{s, g, an}P(\text{LC} = T \,|\, \text{S} = s,\, \text{G} = g)P(\text{G} = g)P(\text{An} = an)\right) \\
+        &= P(\text{PP} = \text{T})\Big(\sum_{an}P(\text{An} = an)\Big)\left(\sum_{s, g}P(\text{LC} = T \,|\, \text{S} = s,\, \text{G} = g)P(\text{G} = g)\right) \\
+        &= P(\text{PP} = \text{T})\left(\sum_{s, g}P(\text{LC} = T \,|\, \text{S} = s,\, \text{G} = g)P(\text{G} = g)\right) \\
+    &= \rule{2cm}{0.15mm}.
+\end{align*}
+
+\subsection{$P$(\text{LC} = \text{T} $\vert$ \textbf{do}(\text{An} = \text{T}))}
+
+We have $P(\text{LC} = \text{T} \,\vert\, \textbf{do}(\text{An} = \text{T}))$ yields
+
+\begin{align*}
+     &= P(\text{LC} = \text{T},\, \text{An} = \text{T}) \\
+        &= P(\text{An} = \text{T})\left(\sum_{s, g, p}P(\text{LC} = T \,|\, \text{S} = s,\, \text{G} = g)P(\text{G} = g)P(\text{S}=s\,|\, \text{An} = T, \text{PP} = p)P(\text{PP} = p)\right) \\
+    &= \rule{2cm}{0.15mm}.
+\end{align*}
+
+\subsection{$P$(\text{LC} = \text{T} $\vert$ \textbf{do}(\text{AD} = \text{T}))}
+
+We have
+
+\begin{align*}
+    P(\text{LC} = \text{T} \,\vert\, \textbf{do}(\text{AD} = \text{T})) &= P(\text{LC} = \text{T},\, \text{AD} = \text{T},\, \text{G}) \\
+        &= \Biggl( \sum_{g} P(\text{AD} = \text{T}\,\vert\, \text{G} = g)\Bigl(\sum_{s}P(\text{LC} = T \,|\, \text{S} = s,\, \text{G} = g)\Bigr)\Biggr) \\
+    &= \rule{2cm}{0.15mm}.
+\end{align*}
 
 
 

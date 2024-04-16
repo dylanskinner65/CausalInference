@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex draft"] 1712928753 "draft.aux" "draft.bbl" "draft" 1712928755
+["bibtex draft"] 1713233703 "draft.aux" "draft.bbl" "draft" 1713233704
   "/usr/local/texlive/2022/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "draft.aux" 1712928755 4327 f8109f1e40805ef8893208a2973db113 "pdflatex"
+  "draft.aux" 1713233704 6003 12f89d973051fa2935fd08cf84b0a779 "pdflatex"
   "references.bib" 1712845238 3947 c8d8517ed9318207754bee71539389b2 ""
   (generated)
   "draft.bbl"
   "draft.blg"
-["pdflatex"] 1712928754 "/Users/dylanskinner/Desktop/math522/CausalInference/latex/draft.tex" "draft.pdf" "draft" 1712928755
-  "/Users/dylanskinner/Desktop/math522/CausalInference/latex/draft.tex" 1712928754 16304 3ecf6526b5225f22efb27261aa0c7330 ""
+["pdflatex"] 1713233703 "/Users/dylanskinner/Desktop/math522/CausalInference/latex/draft.tex" "draft.pdf" "draft" 1713233704
+  "/Users/dylanskinner/Desktop/math522/CausalInference/latex/draft.tex" 1713233702 19915 3aa5b6f05b2db267f2e6ee7ce85b1cc3 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -34,6 +34,7 @@
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb" 1248133631 36554 b67dc2cfa451409e100b3fcf5f506509 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb" 1248133631 30251 6afa5cb1d0204815a708a080681d4674 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1248133631 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
+  "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb" 1248133631 36741 fa121aac0049305630cf160b86157ee4 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb" 1248133631 36281 c355509802a035cadc5f15869451dcee ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1248133631 32722 d7379af29a190c3f453aba36302ff5a9 ""
@@ -167,10 +168,10 @@
   "/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1647878959 4410336 7d30a02e9fa9a16d7d1f8d037ba69641 ""
   "/usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1657121839 2826438 d9a24ea19c8bad2fba92bc4c553da93c ""
   "/usr/local/texlive/2022/texmf.cnf" 1647878952 577 209b46be99c9075fd74d4c0369380e8c ""
-  "draft.aux" 1712928755 4327 f8109f1e40805ef8893208a2973db113 "pdflatex"
-  "draft.bbl" 1712928753 742 dbd75469de187b9b5d7fb8171f0a3055 "bibtex draft"
-  "draft.out" 1712928755 1692 9b41aea0ca8dc95f35b494dc414b71b8 "pdflatex"
-  "draft.tex" 1712928754 16304 3ecf6526b5225f22efb27261aa0c7330 ""
+  "draft.aux" 1713233704 6003 12f89d973051fa2935fd08cf84b0a779 "pdflatex"
+  "draft.bbl" 1713233703 742 dbd75469de187b9b5d7fb8171f0a3055 "bibtex draft"
+  "draft.out" 1713233704 2546 ba2b28b0cf899b70579fcc0e9589f4fe "pdflatex"
+  "draft.tex" 1713233702 19915 3aa5b6f05b2db267f2e6ee7ce85b1cc3 ""
   (generated)
   "draft.aux"
   "draft.log"
