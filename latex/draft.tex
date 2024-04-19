@@ -33,6 +33,24 @@
 
 \section{Introduction}
 \label{intro}
+Neural networks are at the center of computer science research and have revolutionized our ability to model complex relationships with data.
+However, as these networks become increasingly pervasive in decision-making processes, understanding the causality behind their predictions becomes paramount. 
+The distinction between correlation and causation is not merely philosophical; it's foundational for building robust, interpretable, and ethically sound AI systems.
+
+Causal inference, a field deeply rooted in statistics and philosophy, offers a framework to disentangle cause-and-effect relationships from observed data. 
+Traditionally, causal inference has been applied in fields such as epidemiology, economics, and social sciences. 
+However, its integration into the domain of neural networks presents a promising frontier, with implications ranging from improving model interpretability to enhancing the fairness and accountability of AI systems.
+
+In this paper, we explore the intersection of causal inference and neural networks, focusing on the application of Graph Neural Networks (GNNs) to causal modeling.
+We leverage the power of GNNs to learn representations of graph-structured data and perform a supervised classification task on the LUCAS0 dataset~\cite{lucas_dataset}.
+Our goal is to demonstrate the effectiveness of GNNs in capturing causal relationships within a graph and to provide insights into the interpretability and robustness of these models.
+
+\section{Related Work}
+\label{related}
+The integration of causal inference with neural networks has garnered significant interest in recent years.
+Several approaches have been proposed to combine the strengths of these two fields, with a particular focus on leveraging the expressive power of neural networks to model causal relationships.
+Koch et al. discusses ongoing work to extend causal inference to settings where confounding is non-linear, time-varying, or encoded in text, networks, and images \cite{koch2023deep}.
+Also, Yuan et al. compared the performance of CNN's on causal data to previous methods \cite{yuan2020causal}.
 
 
 \section{Graph Neural Networks}

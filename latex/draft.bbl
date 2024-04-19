@@ -18,4 +18,16 @@ Judea Pearl.
 \newblock The LUCAS dataset contains CT scan images and annotations for lung
   cancer detection.
 
+\bibitem{koch2023deep}
+Bernard J. Koch, Tim Sainburg, Pablo Geraldo Bast\'{i}as, Song Jiang, Yizhou Sun, and Jacob Foster.
+\newblock Deep Learning for Causal Inference.
+\newblock UCLA Department of Sociology, April 2023.
+
+\bibitem{yuan2020causal}
+Ye Yuan, Xueying Ding, and Ziv Bar-Joseph.
+\newblock Causal inference using deep neural networks.
+\newblock arXiv preprint arXiv:2011.12508, 202
+
+
+
 \end{thebibliography}
